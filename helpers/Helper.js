@@ -14,7 +14,7 @@ const modelError = (error) => {
     };
 }
 
-const responseSuccess = (res, message='', data=null) => {
+const responseSuccess = (res, message=null, data=null) => {
     var response = {
         status: 'success'
     }
@@ -30,8 +30,10 @@ const responseSuccess = (res, message='', data=null) => {
 
 const responseFail = (res, message='', param='', code=400) => {
     var message = {
-        msg: message,
-        param: param
+        msg: message
+    }
+    if (param) {
+        response.param = param;
     }
 
     return res.status(code).json({
