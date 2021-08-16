@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const salt = bcrypt.genSaltSync(process.env.BCRYPT_SALT);
+const salt = bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT));
 const { User } = require('../../../models');
 const { modelError } = require('../../../helpers/Helper');
 
