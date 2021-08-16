@@ -1,5 +1,5 @@
-var express = require('express');
 const {check, body, validationResult} = require('express-validator');
+const { User } = require('../../../../models');
 
 const AuthValidator = {
     register : [
@@ -10,7 +10,13 @@ const AuthValidator = {
 			.bail()
 			.normalizeEmail()
 			.isEmail()
-			.withMessage('Invalid email address.'),
+			.withMessage('Invalid email address.')
+			.custom(async (value) => {
+				const user = await User.findOne({ where: {email: value} });
+	            if (user) {
+	                throw new Error('Email has been taken.');
+	            }
+	        }),
 		check('name')
 			.trim()
 			.escape()
@@ -34,7 +40,6 @@ const AuthValidator = {
 			.withMessage('Minimum 6 characters required.')
 			.custom((value, {req, loc, path}) => {
 	            if (value !== req.body.password) {
-	                // trow error if passwords do not match
 	                throw new Error('Password confirmation is not match.');
 	            } else {
 	                return value;
