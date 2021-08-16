@@ -4,38 +4,39 @@ module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		return queryInterface.createTable('Users', {
 			id: {
-				allowNull: false,
-				primaryKey: true,
 				type: Sequelize.UUID,
-				defaultValue: Sequelize.UUIDV4,
+				primaryKey: true,
+				allowNull: false,
+				defaultValue: Sequelize.UUIDV4
 			},
 			email: {
+				type: Sequelize.STRING,
 				allowNull: false,
-				type: Sequelize.STRING
+				unique: true
 			},
 			name: {
-				allowNull: false,
-				type: Sequelize.STRING
+				type: Sequelize.STRING,
+				allowNull: false
 			},
 			password: {
-				allowNull: false,
-				type: Sequelize.STRING
+				type: Sequelize.STRING,
+				allowNull: false
 			},
 			type: {
-				allowNull: false,
-				type: Sequelize.STRING
+				type: Sequelize.STRING,
+				allowNull: false
 			},
 			device_token: {
-				allowNull: true,
-				type: Sequelize.STRING
+				type: Sequelize.STRING,
+				allowNull: true
 			},
 			created_at: {
-				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 			updated_at: {
-				allowNull: false,
-				type: Sequelize.DATE
+				type: Sequelize.DATE,
+				allowNull: false
 			},
 		});
 	},
