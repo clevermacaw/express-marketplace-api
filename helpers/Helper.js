@@ -33,7 +33,7 @@ const responseFail = (res, message='', param='', code=400) => {
         msg: message
     }
     if (param) {
-        response.param = param;
+        message.param = param;
     }
 
     return res.status(code).json({

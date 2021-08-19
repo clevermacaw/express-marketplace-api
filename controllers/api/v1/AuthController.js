@@ -34,9 +34,7 @@ const AuthController = {
             return responseFail(res, 'Password is invalid.', 'password');
         }
 
-        var token_data = user.toJSON();
-
-        var token = jwt.sign(token_data, process.env.TOKEN_SECRET, { expiresIn: '30d' });
+        var token = jwt.sign(user.toJSON(), process.env.TOKEN_SECRET, { expiresIn: '30d' });
         return responseSuccess(res, null, token);
     }
 };
