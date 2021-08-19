@@ -34,10 +34,9 @@ const AuthController = {
             return responseFail(res, 'Password is invalid.', 'password');
         }
 
-        var token_data = user.get();
-        delete token_data.password;
+        var token_data = user.toJSON();
 
-        var token = jwt.sign(token_data, process.env.TOKEN_SECRET, { expiresIn: '1h' });
+        var token = jwt.sign(token_data, process.env.TOKEN_SECRET, { expiresIn: '30d' });
         return responseSuccess(res, null, token);
     }
 };

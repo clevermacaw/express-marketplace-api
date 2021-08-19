@@ -10,9 +10,8 @@ const UserController = {
         if (!user) {
             throw new Error('Data not found.');
         }
-        user = user.get();
-        delete user.password;
-        responseSuccess(res, null, user);
+
+        responseSuccess(res, null, user.toJSON());
     },
 };
 

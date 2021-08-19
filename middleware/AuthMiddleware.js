@@ -13,7 +13,6 @@ const AuthMiddleware = {
             // pass data to request
             req.auth = decoded;
         } catch(err) {
-            console.log('err', err)
             return responseFail(res, 'Invalid token.');
         }
 
