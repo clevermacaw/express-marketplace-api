@@ -6,7 +6,7 @@ var merchantRouter = require('./merchant');
 var userRouter = require('./user');
 
 router.use('/auth', authRouter);
-router.use('/merchant', merchantRouter);
-router.use('/user', userRouter);
+router.use('/merchants', merchantRouter);
+router.use('/users', userRouter);
 
 module.exports = router;
