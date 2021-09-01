@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { auth, responseFail } = require('../helpers/Helper');
+const { auth, failResponse } = require('../helpers/Helper');
 
 const AuthMiddleware = {
     auth: (req, res, next) => {
@@ -13,7 +13,7 @@ const AuthMiddleware = {
             // pass data to request
             req.auth = decoded;
         } catch(err) {
-            return responseFail(res, 'Invalid token.');
+            return failResponse(res, 'Invalid token.');
         }
 
         next();

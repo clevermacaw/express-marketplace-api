@@ -14,7 +14,7 @@ const modelError = (error) => {
     };
 }
 
-const responseSuccess = (res, message=null, data=null) => {
+const successResponse = (res, message=null, data=null) => {
     var response = {
         status: 'success'
     }
@@ -28,7 +28,7 @@ const responseSuccess = (res, message=null, data=null) => {
     res.json(response);
 }
 
-const responseFail = (res, message='', param='', code=400) => {
+const failResponse = (res, message='', param='', code=400) => {
     var message = {
         msg: message
     }
@@ -41,4 +41,4 @@ const responseFail = (res, message='', param='', code=400) => {
     });
 }
 
-module.exports = { modelError, responseSuccess, responseFail }
+module.exports = { modelError, successResponse, failResponse }

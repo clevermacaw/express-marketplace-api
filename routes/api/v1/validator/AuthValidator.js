@@ -1,4 +1,4 @@
-const {check, body, validationResult} = require('express-validator');
+const { check, body, validationResult } = require('express-validator');
 const { User } = require('../../../../models');
 
 const AuthValidator = {
