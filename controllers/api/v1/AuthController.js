@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT));
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 const { User } = require('../../../models');
 const { modelError, successResponse, failResponse } = require('../../../helpers/Helper');
 
@@ -24,7 +25,14 @@ const AuthController = {
 
     login: async (req, res) => {
         const body = req.body;
-        const user = await User.findOne({ where: {email: body.email, type: 'Customer'} });
+        const user = await User.findOne({
+            where: {
+                email: body.email,
+                type: {
+                    [Op.or]: ['Customer', 'Merchant']
+                }
+            }
+        });
         if (!user) {
             return failResponse(res, 'Email not found.', 'email');
         }
