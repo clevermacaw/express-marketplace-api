@@ -41,6 +41,18 @@ const UserController = {
             successResponse(res, 'Successfully change password.');
         });
     },
+
+    deviceToken: async (req, res) => {
+        const { auth, body } = req;
+
+        var user = await getUser(auth.id, res);
+        user.update({
+            device_token: body.device_token
+        })
+        .then( updatedRecord => {
+            successResponse(res, 'Successfully update device token');
+        });
+    }
 };
 
 const getUser = async (id, res) => {

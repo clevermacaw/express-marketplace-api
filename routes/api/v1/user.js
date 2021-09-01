@@ -16,4 +16,6 @@ router.post('/update', UserValidator.update, UserController.update);
 
 router.post('/change-password', UserValidator.changePassword, UserController.changePassword);
 
+router.post('/device-token', UserValidator.deviceToken, UserController.deviceToken);
+
 module.exports = router;

@@ -78,6 +78,20 @@ const UserValidator = {
 			next();
 		},
 	],
+
+	deviceToken: [
+		check('device_token')
+			.trim()
+			.escape()
+			.notEmpty()
+			.withMessage('Device token can not be empty.'),
+		(req, res, next) => {
+			const errors = validationResult(req);
+			if (!errors.isEmpty())
+				return res.status(400).json({errors: errors.array()});
+			next();
+		},
+	],
 };
 
 module.exports = UserValidator;
