@@ -5,6 +5,11 @@ const AuthMiddleware = {
     auth: (req, res, next) => {
         var headers = req.headers;
         var bearer_token = headers.authorization;
+        
+        if (!bearer_token) {
+            return failResponse(res, 'Unauthorized.');
+        }
+
         bearer_token = bearer_token.replace('Bearer ', '');
 
         try {

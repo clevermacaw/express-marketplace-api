@@ -3,13 +3,15 @@ var router = express.Router();
 
 const UserController = require('../../../controllers/api/v1/UserController');
 const AuthMiddleware = require('../../../middleware/AuthMiddleware');
+const UserValidator  = require('./validator/UserValidator');
 
 /*** USER ROUTE ***/
 
-router.get('/profile', AuthMiddleware.auth, UserController.profile);
+// middleware that is specific to this router
+router.use(AuthMiddleware.auth);
 
-router.get('/add', function(req, res, next) {
-	res.send('user add');
-});
+router.get('/profile', UserController.profile);
+
+router.post('/update', UserValidator.update, UserController.update);
 
 module.exports = router;
