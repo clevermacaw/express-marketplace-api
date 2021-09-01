@@ -25,7 +25,7 @@ const successResponse = (res, message=null, data=null) => {
         response.data = data;
     }
 
-    res.json(response);
+    return res.json(response);
 }
 
 const failResponse = (res, message='', param='', code=400) => {

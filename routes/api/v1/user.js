@@ -14,4 +14,6 @@ router.get('/profile', UserController.profile);
 
 router.post('/update', UserValidator.update, UserController.update);
 
+router.post('/change-password', UserValidator.changePassword, UserController.changePassword);
+
 module.exports = router;

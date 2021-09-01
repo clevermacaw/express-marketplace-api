@@ -36,8 +36,6 @@ const AuthValidator = {
 			.notEmpty()
 			.withMessage('Password can not be empty.')
 			.bail()
-			.isLength({min: 6})
-			.withMessage('Minimum 6 characters required.')
 			.custom((value, {req, loc, path}) => {
 	            if (value !== req.body.password) {
 	                throw new Error('Password confirmation is not match.');
