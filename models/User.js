@@ -59,9 +59,9 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: new Date()
 		},
 	}, {
+		sequelize,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
-		sequelize,
 		modelName: 'User',
 	});
 
