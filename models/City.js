@@ -12,12 +12,12 @@ module.exports = (sequelize, DataTypes) => {
 
 	City.init({
 		id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.INTEGER.UNSIGNED,
 			primaryKey: true,
 			allowNull: false
 		},
 		province_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.INTEGER.UNSIGNED,
 			allowNull: false,
 			references: { model: 'Province', key: 'id' },
 			onUpdate: 'CASCADE',

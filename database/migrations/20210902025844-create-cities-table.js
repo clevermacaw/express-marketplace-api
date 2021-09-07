@@ -4,12 +4,12 @@ module.exports = {
 	up: async (queryInterface, Sequelize) => {
 		return queryInterface.createTable('cities', {
 			id: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.INTEGER.UNSIGNED,
 				primaryKey: true,
 				allowNull: false
 			},
 			province_id: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.INTEGER.UNSIGNED,
 				allowNull: false,
 				references: { model: 'provinces', key: 'id' },
 				onUpdate: 'CASCADE',
