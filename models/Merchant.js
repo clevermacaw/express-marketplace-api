@@ -4,46 +4,52 @@ const { Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-	class User extends Model {
+	class Merchant extends Model {
 		static associate(models) {
-			User.hasOne(models.Merchant);
+			Merchant.belongsTo(models.City);
+			Merchant.belongsTo(models.User);
+			Merchant.hasMany(models.Product);
 		}
-
-	    toJSON() {
-	      var values = Object.assign({}, this.get());
-
-	      delete values.password;
-	      return values;
-	    }
 	};
 
-	User.init({
+	Merchant.init({
 		id: {
 			type: DataTypes.UUID,
 			primaryKey: true,
 			allowNull: false,
 			defaultValue: uuidv4()
 		},
-		email: {
-			type: DataTypes.STRING,
-			allowNull: false,
-			unique: true
+		user_id: {
+			type: DataTypes.UUID,
+			references: { model: 'User', key: 'id' },
+			onUpdate: 'CASCADE',
+        	onDelete: 'CASCADE',
 		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		password: {
+		image: {
+			type: DataTypes.STRING,
+		},
+		description: {
+			type: DataTypes.STRING,
+		},
+		status: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		type: {
+		address: {
 			type: DataTypes.STRING,
-			allowNull: false
 		},
-		device_token: {
-			type: DataTypes.STRING,
-			allowNull: true
+		city_id: {
+			type: DataTypes.INTEGER,
+			references: { model: 'City', key: 'id' },
+			onUpdate: 'CASCADE',
+        	onDelete: 'CASCADE',
+		},
+		coordinate: {
+			type: DataTypes.GEOMETRY,
 		},
 		created_at: {
 			type: DataTypes.DATE,
@@ -57,8 +63,8 @@ module.exports = (sequelize, DataTypes) => {
 		sequelize,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
-		modelName: 'User',
+		modelName: 'Merchant',
 	});
 
-	return User;
+	return Merchant;
 };
