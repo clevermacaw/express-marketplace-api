@@ -21,3 +21,4 @@ Marketplace Express is an API for e-commerce with multi vendors/ merchants build
 	- dotenv
 	- bcrypt
 	- UUID
+	- Upload file
