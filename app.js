@@ -1,9 +1,9 @@
 var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express = require('express');
 var formData = require('express-form-data');
+var logger = require('morgan');
+var path = require('path');
 
 var v1Router = require('./routes/api/v1/index');
 
