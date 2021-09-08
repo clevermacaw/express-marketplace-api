@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const { Op } = require('sequelize');
 const { User } = require('../../../models');
 const { modelError, successResponse, failResponse } = require('../../../helpers/Helper');
+const { userType } = require('../../../constants/EnumConst');
 
 const AuthController = {
     register: (req, res) => {
@@ -12,7 +13,7 @@ const AuthController = {
             name: body.name,
             email: body.email,
             password: bcrypt.hashSync(body.password, salt),
-            type: 'Customer',
+            type: userType.customer,
         })
         .then(function(item) {
             successResponse(res, 'Successfully register.');
@@ -29,7 +30,7 @@ const AuthController = {
             where: {
                 email: body.email,
                 type: {
-                    [Op.or]: ['Customer', 'Merchant']
+                    [Op.or]: [userType.customer, userType.store]
                 }
             }
         });

@@ -5,6 +5,7 @@ const { User } = require('../../../models');
 const { successResponse, failResponse } = require('../../../helpers/Helper');
 const { uploadFile, removeFile } = require('../../../helpers/FileHelper');
 const { userImage } = require('../../../constants/UploadPathConst');
+const { userType } = require('../../../constants/EnumConst');
 
 const UserController = {
     profile: async (req, res) => {
@@ -17,8 +18,9 @@ const UserController = {
     update: async (req, res) => {
         const { auth, body } = req;
         var image = req.files && req.files.image ? req.files.image : null;
+        var imageName = null;
         try {
-            var imageName = uploadFile(image, userImage);
+            imageName = uploadFile(image, userImage);
         } catch(e) {
             return failResponse(res, e.message, 'image');
         }
@@ -26,7 +28,7 @@ const UserController = {
         var user = await getUser(auth.id, res);
         // remove old image
         if (!image && user.image) {
-            removeFile(userImage + user.image);
+            imageName = user.image;
         }
 
         user.update({
@@ -74,7 +76,7 @@ const getUser = async (id, res) => {
         where: {
             id: id,
             type: {
-                [Op.or]: ['Customer', 'Merchant']
+                [Op.or]: [userType.customer, userType.store]
             }
         }
     });

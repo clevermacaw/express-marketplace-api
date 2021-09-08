@@ -2,6 +2,7 @@
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
 const salt = bcrypt.genSaltSync(parseInt(process.env.BCRYPT_SALT));
+const { userType } = require('../../constants/EnumConst');
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => queryInterface.bulkInsert('users', [
@@ -10,7 +11,7 @@ module.exports = {
 			name: 'Admin',
 			email: 'admin@mail.com',
 			password: bcrypt.hashSync('123456', salt),
-			type: 'Admin',
+			type: userType.admin,
 			created_at: new Date(),
 			updated_at: new Date()
 		},
@@ -19,16 +20,16 @@ module.exports = {
 			name: 'Hello',
 			email: 'hello@mail.com',
 			password: bcrypt.hashSync('123456', salt),
-			type: 'Customer',
+			type: userType.customer,
 			created_at: new Date(),
 			updated_at: new Date()
 		},
 		{
 			id: uuidv4(),
-			name: 'Merchant',
-			email: 'merchant@mail.com',
+			name: 'Store',
+			email: 'store@mail.com',
 			password: bcrypt.hashSync('123456', salt),
-			type: 'Merchant',
+			type: userType.store,
 			created_at: new Date(),
 			updated_at: new Date()
 		},
