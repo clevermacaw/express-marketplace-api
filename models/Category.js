@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 	class Category extends Model {
 		static associate(models) {
 			Category.hasMany(models.Category);
-			Category.hasMany(models.Product);
+			Category.hasMany(models.Product, { targetKey: 'subcategory_id' });
 		}
 	};
 
@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	}, {
 		sequelize,
+		underscored: true,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
 		modelName: 'Category',

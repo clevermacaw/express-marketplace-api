@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
 			allowNull: false
 		},
 		city_id: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.INTEGER.UNSIGNED,
 			references: { model: 'City', key: 'id' },
 			onUpdate: 'CASCADE',
         	onDelete: 'CASCADE',
@@ -59,6 +59,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	}, {
 		sequelize,
+		underscored: true,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
 		modelName: 'Store',

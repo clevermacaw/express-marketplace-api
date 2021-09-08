@@ -5,7 +5,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
 	class Product extends Model {
 		static associate(models) {
-			Product.belongsTo(models.Category, { as: 'Subcategory' });
+			Product.belongsTo(models.Category, { as: 'Subcategory', foreignKey: 'subcategory_id' });
 			Product.belongsTo(models.Store);
 		}
 	};
@@ -79,6 +79,7 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	}, {
 		sequelize,
+		underscored: true,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
 		modelName: 'Product',
