@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-/*** MERCHANT ROUTE ***/
+/*** STORE ROUTE ***/
 
 router.get('/', function(req, res, next) {
-    res.send('merchant');
+    res.send('Store');
 });
 
 router.get('/add', function(req, res, next) {
-    res.send('merchant add');
+    res.send('Store add');
 });
 
 module.exports = router;

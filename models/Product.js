@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
 	class Product extends Model {
 		static associate(models) {
 			Product.belongsTo(models.Category, { as: 'Subcategory' });
-			Product.belongsTo(models.Merchant);
+			Product.belongsTo(models.Store);
 		}
 	};
 
@@ -17,9 +17,9 @@ module.exports = (sequelize, DataTypes) => {
 			autoIncrement: true,
 			allowNull: false,
 		},
-		merchant_id: {
+		store_id: {
 			type: DataTypes.UUID,
-			references: { model: 'Merchant', key: 'id' },
+			references: { model: 'Store', key: 'id' },
 			onUpdate: 'CASCADE',
         	onDelete: 'CASCADE',
 		},

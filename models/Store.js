@@ -4,15 +4,15 @@ const { Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize, DataTypes) => {
-	class Merchant extends Model {
+	class Store extends Model {
 		static associate(models) {
-			Merchant.belongsTo(models.City);
-			Merchant.belongsTo(models.User);
-			Merchant.hasMany(models.Product);
+			Store.belongsTo(models.City);
+			Store.belongsTo(models.User);
+			Store.hasMany(models.Product);
 		}
 	};
 
-	Merchant.init({
+	Store.init({
 		id: {
 			type: DataTypes.UUID,
 			primaryKey: true,
@@ -29,6 +29,10 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		domain: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		image: {
 			type: DataTypes.STRING,
 		},
@@ -39,17 +43,11 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		address: {
-			type: DataTypes.STRING,
-		},
 		city_id: {
 			type: DataTypes.INTEGER,
 			references: { model: 'City', key: 'id' },
 			onUpdate: 'CASCADE',
         	onDelete: 'CASCADE',
-		},
-		coordinate: {
-			type: DataTypes.GEOMETRY,
 		},
 		created_at: {
 			type: DataTypes.DATE,
@@ -63,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
 		sequelize,
 		updatedAt: 'updated_at',
 		createdAt: 'created_at',
-		modelName: 'Merchant',
+		modelName: 'Store',
 	});
 
-	return Merchant;
+	return Store;
 };

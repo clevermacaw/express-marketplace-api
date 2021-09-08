@@ -8,10 +8,10 @@ module.exports = {
 				autoIncrement: true,
 				allowNull: false,
 			},
-			merchant_id: {
+			store_id: {
 				type: Sequelize.UUID,
 				allowNull: false,
-				references: { model: 'merchants', key: 'id' },
+				references: { model: 'stores', key: 'id' },
 				onUpdate: 'CASCADE',
             	onDelete: 'CASCADE',
 			},

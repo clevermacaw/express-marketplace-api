@@ -2,7 +2,7 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable('merchants', {
+		await queryInterface.createTable('stores', {
 			id: {
 				type: Sequelize.UUID,
 				primaryKey: true,
@@ -20,6 +20,10 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
+			domain: {
+				type: Sequelize.STRING,
+				allowNull: false
+			},
 			image: {
 				type: Sequelize.STRING
 			},
@@ -30,17 +34,11 @@ module.exports = {
 				type: Sequelize.STRING,
 				allowNull: false
 			},
-			address: {
-				type: Sequelize.STRING
-			},
 			city_id: {
 				type: Sequelize.INTEGER.UNSIGNED,
 				references: { model: 'cities', key: 'id' },
 				onUpdate: 'CASCADE',
             	onDelete: 'SET NULL',
-			},
-			coordinate: {
-				type: Sequelize.GEOMETRY
 			},
 			created_at: {
 				type: Sequelize.DATE,
@@ -53,6 +51,6 @@ module.exports = {
 		});
 	},
 	down: async (queryInterface, Sequelize) => {
-		await queryInterface.dropTable('merchants');
+		await queryInterface.dropTable('stores');
 	}
 };
