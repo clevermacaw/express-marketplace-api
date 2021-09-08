@@ -18,11 +18,13 @@ module.exports = {
 			},
 			name: {
 				type: Sequelize.STRING,
-				allowNull: false
+				allowNull: false,
+				unique: true
 			},
 			domain: {
 				type: Sequelize.STRING,
-				allowNull: false
+				allowNull: false,
+				unique: true
 			},
 			image: {
 				type: Sequelize.STRING
