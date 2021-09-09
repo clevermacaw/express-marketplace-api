@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = (sequelize, DataTypes) => {
 	class Store extends Model {
 		static associate(models) {
-			Store.belongsTo(models.City);
+			Store.belongsTo(models.City, { as: 'city' });
 			Store.belongsTo(models.User);
 			Store.hasMany(models.Product);
 		}

@@ -34,6 +34,21 @@ const StoreController = {
             res.status(400).json(error);
         }
     },
+
+    profile: async (req, res) => {
+        const { auth } = req;
+
+        var store = await Store.findByPk(auth.Store.id, {
+            include: 'city',
+            attributes: { exclude: ['user_id', 'UserId', 'cityId'] }
+        });
+
+        if (!store) {
+            return failResponse(res, 'Data not found.');
+        }
+
+        successResponse(res, null, store);
+    }
 };
 
 const getUser = async (res, id, type=userType.store) => {

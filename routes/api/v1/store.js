@@ -3,6 +3,7 @@ var router = express.Router();
 
 const StoreController = require('../../../controllers/api/v1/StoreController');
 const AuthMiddleware = require('../../../middleware/AuthMiddleware');
+const StoreMiddleware = require('../../../middleware/StoreMiddleware');
 const StoreValidator  = require('./validator/StoreValidator');
 
 /*** STORE ROUTE ***/
@@ -10,5 +11,7 @@ const StoreValidator  = require('./validator/StoreValidator');
 router.use(AuthMiddleware.auth);
 
 router.post('/register', StoreValidator.register, StoreController.register);
+
+router.get('/profile', StoreMiddleware.store, StoreController.profile);
 
 module.exports = router;
