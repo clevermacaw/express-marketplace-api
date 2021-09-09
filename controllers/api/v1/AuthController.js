@@ -32,7 +32,8 @@ const AuthController = {
                 type: {
                     [Op.or]: [userType.customer, userType.store]
                 }
-            }
+            },
+            include: 'Store'
         });
         if (!user) {
             return failResponse(res, 'Email not found.', 'email');

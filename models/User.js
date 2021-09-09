@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
 		}
 
 	    toJSON() {
-	      var values = Object.assign({}, this.get());
+			var values = Object.assign({}, this.get());
 
-	      delete values.password;
-	      return values;
+			delete values.password;
+			return values;
 	    }
 	};
 
