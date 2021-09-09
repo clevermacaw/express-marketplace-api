@@ -11,6 +11,7 @@ const AuthValidator = {
 			.normalizeEmail()
 			.isEmail()
 			.withMessage('Invalid email address.')
+			.bail()
 			.custom(async (value) => {
 				const user = await User.findOne({ where: {email: value} });
 	            if (user) {

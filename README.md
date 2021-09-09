@@ -22,3 +22,6 @@ Marketplace Express is an API for e-commerce with multi vendors/ merchants build
 	- bcrypt
 	- UUID
 	- Upload file
+
+- 3rd Party :
+	- Raja Ongkir
