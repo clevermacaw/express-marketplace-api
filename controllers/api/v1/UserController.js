@@ -72,9 +72,8 @@ const UserController = {
 };
 
 const getUser = async (id, res) => {
-    var user = await User.findOne({
+    var user = await User.findByPk(id, {
         where: {
-            id: id,
             type: {
                 [Op.or]: [userType.customer, userType.store]
             }
