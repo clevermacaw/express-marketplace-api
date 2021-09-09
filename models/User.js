@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 module.exports = (sequelize, DataTypes) => {
 	class User extends Model {
 		static associate(models) {
-			User.hasOne(models.Store);
+			User.hasOne(models.Store, { as: 'store', foreignKey: 'user_id' });
 		}
 
 	    toJSON() {

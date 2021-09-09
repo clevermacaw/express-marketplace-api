@@ -38,7 +38,7 @@ const StoreController = {
     profile: async (req, res) => {
         const { auth } = req;
 
-        var store = await Store.findByPk(auth.Store.id, {
+        var store = await Store.findByPk(auth.store.id, {
             include: 'city',
             attributes: { exclude: ['user_id', 'UserId', 'cityId'] }
         });

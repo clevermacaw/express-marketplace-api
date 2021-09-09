@@ -47,11 +47,7 @@ const StoreValidator = {
 			.withMessage('City can not be empty.')
 			.bail()
 			.custom(async (value) => {
-				const city = await City.findOne({
-					where: {
-						id: value
-			        }
-		        });
+				const city = await City.findByPk(value);
 	            if (!city) {
 	                throw new Error('City not found.');
 	            }
