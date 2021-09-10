@@ -17,6 +17,7 @@ const UserController = {
 
     update: async (req, res) => {
         const { auth, body } = req;
+        var user = await getUser(auth.id, res);
         var image = req.files && req.files.image ? req.files.image : null;
         var imageName = null;
         try {
@@ -25,8 +26,7 @@ const UserController = {
             return failResponse(res, e.message, 'image');
         }
 
-        var user = await getUser(auth.id, res);
-        // remove old image
+        // old image
         if (!image && user.image) {
             imageName = user.image;
         }
