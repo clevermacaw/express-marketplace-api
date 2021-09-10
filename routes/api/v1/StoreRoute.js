@@ -11,7 +11,7 @@ const StoreValidator  = require('./validator/StoreValidator');
 router.use(AuthMiddleware.auth);
 
 router.post('/register', StoreValidator.register, StoreController.register);
-
 router.get('/profile', StoreMiddleware.store, StoreController.profile);
+router.post('/profile/update', StoreMiddleware.store, StoreValidator.updateProfile, StoreController.updateProfile);
 
 module.exports = router;

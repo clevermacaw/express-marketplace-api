@@ -1,8 +1,8 @@
 const { Store, User, sequelize } = require('../../../models');
+const { userType, storeStatus } = require('../../../constants/EnumConst');
 const { modelError, successResponse, failResponse } = require('../../../helpers/Helper');
 const { uploadFile, removeFile } = require('../../../helpers/FileHelper');
-const { userImage } = require('../../../constants/UploadPathConst');
-const { userType, storeStatus } = require('../../../constants/EnumConst');
+const { storeImage } = require('../../../constants/UploadPathConst');
 
 const StoreController = {
     register: async (req, res) => {
@@ -48,6 +48,36 @@ const StoreController = {
         }
 
         successResponse(res, null, store);
+    },
+
+    updateProfile: async (req, res) => {
+        const { auth, body } = req;
+
+        var store = await Store.findByPk(auth.store.id);
+        if (!store) {
+            return failResponse(res, 'Data not found.');
+        }
+
+        var image = req.files && req.files.image ? req.files.image : null;
+        var imageName = null;
+        if (image && image.name) {
+            try {
+                imageName = uploadFile(image, storeImage);
+            } catch(e) {
+                return failResponse(res, e.message, 'image');
+            }
+        }
+
+        store.update({
+            name: body.name,
+            domain: body.domain,
+            image: imageName,
+            description: body.description,
+            city_id: body.city_id,
+        })
+        .then( updatedRecord => {
+            successResponse(res, null, updatedRecord.toJSON());
+        });
     }
 };
 
