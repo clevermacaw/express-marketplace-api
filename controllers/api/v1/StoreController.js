@@ -63,9 +63,12 @@ const StoreController = {
         if (image && image.name) {
             try {
                 imageName = uploadFile(image, storeImage);
+                removeFile(storeImage + store.image);
             } catch(e) {
                 return failResponse(res, e.message, 'image');
             }
+        } else {
+            imageName = store.image;
         }
 
         store.update({

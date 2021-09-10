@@ -10,6 +10,14 @@ module.exports = (sequelize, DataTypes) => {
 			Store.belongsTo(models.User);
 			Store.hasMany(models.Product);
 		}
+
+	    toJSON() {
+			var values = Object.assign({}, this.get());
+			delete values.user_id;
+			delete values.UserId;
+			delete values.cityId;
+			return values;
+	    }
 	};
 
 	Store.init({

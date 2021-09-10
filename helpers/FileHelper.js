@@ -7,7 +7,7 @@ const uploadFile = (file, uploadPath, key='') => {
 	}
 
 	var ext = path.extname(file.name);
-	if(ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
+	if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
 		throw new Error('Invalid file extension');
 	}
 
@@ -15,7 +15,7 @@ const uploadFile = (file, uploadPath, key='') => {
 		throw new Error('File size should not more than 2MB');
 	}
 
-	if (!fs.existsSync(uploadPath)){
+	if (!fs.existsSync(uploadPath)) {
 		fs.mkdirSync(uploadPath, { recursive: true });
 	}
 
@@ -29,7 +29,9 @@ const uploadFile = (file, uploadPath, key='') => {
 }
 
 const removeFile = (filePath) => {
-	fs.unlinkSync(filePath);
+	if (filePath) {
+		fs.unlinkSync(filePath);
+	}
 }
 
 const getFileSize = (filePath) => {

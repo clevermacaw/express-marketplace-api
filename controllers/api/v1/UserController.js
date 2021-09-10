@@ -22,6 +22,7 @@ const UserController = {
         var imageName = null;
         try {
             imageName = uploadFile(image, userImage);
+            removeFile(userImage + user.image);
         } catch(e) {
             return failResponse(res, e.message, 'image');
         }
