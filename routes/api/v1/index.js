@@ -1,14 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
-var authRouter = require('./auth');
-var regionRouter = require('./region');
-var storeRouter = require('./store');
-var userRouter = require('./user');
+var AuthRoute = require('./AuthRoute');
+var RegionRoute = require('./RegionRoute');
+var StoreRoute = require('./StoreRoute');
+var UserRoute = require('./UserRoute');
 
-router.use('/auth', authRouter);
-router.use('/regions', regionRouter);
-router.use('/stores', storeRouter);
-router.use('/users', userRouter);
+router.use('/auth', AuthRoute);
+router.use('/regions', RegionRoute);
+router.use('/stores', StoreRoute);
+router.use('/users', UserRoute);
 
 module.exports = router;
