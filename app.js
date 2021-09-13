@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var cookieParser = require('cookie-parser');
+var cors = require('cors');
 var express = require('express');
 var formData = require('express-form-data');
 var logger = require('morgan');
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(formData.parse());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'storage')));
+app.use(cors());
 
 app.use('/api/v1', v1Router);
 
