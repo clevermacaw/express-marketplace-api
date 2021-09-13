@@ -2,6 +2,7 @@
 
 const { Model } = require('sequelize');
 const { v4: uuidv4 } = require('uuid');
+const { storeImage, getImagePath } = require('../constants/UploadPathConst');
 
 module.exports = (sequelize, DataTypes) => {
 	class Store extends Model {
@@ -65,6 +66,12 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.DATE,
 			defaultValue: new Date()
 		},
+		image_url: {
+			type: DataTypes.VIRTUAL,
+			get() {
+				return getImagePath(this.image, storeImage);
+			}
+		}
 	}, {
 		sequelize,
 		underscored: true,
